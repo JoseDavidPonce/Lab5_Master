@@ -27,7 +27,7 @@ void Init_I2C_Master(const unsigned long b){
 
 void Init_I2C_Slave(uint8_t address){
     SSPADD = address;
-    SSPCON - 0x36;
+    SSPCON = 0x36;
     SSPSTAT = 0x80;
     SSPCON2 = 0x01;
     TRISCbits.TRISC3 = 1;
@@ -40,7 +40,7 @@ void Init_I2C_Slave(uint8_t address){
 }
 
 void Wait_I2C_Master(){
-    while ((SSPSTAT & 0x04) || (SSPCON2 & 01F));
+    while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 }
 
 void Start_I2C_Master(){

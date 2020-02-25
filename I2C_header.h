@@ -17,10 +17,10 @@
 
 void Init_I2C_Master(const unsigned long b);
 void Init_I2C_Slave(uint8_t address);
-void Wait_I2C_Master();
-void Start_I2C_Master();
-void Restart_I2C();
-void Stop_I2C_Master();
+void Wait_I2C_Master(void);
+void Start_I2C_Master(void);
+void Restart_I2C(void);
+void Stop_I2C_Master(void);
 void Write_I2C_Master(unsigned a);
 unsigned short I2C_Master_Read(unsigned short a);
 
