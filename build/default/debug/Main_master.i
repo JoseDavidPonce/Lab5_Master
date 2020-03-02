@@ -30,6 +30,8 @@
 
 
 
+
+
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2514,7 +2516,7 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\xc.h" 2 3
-# 23 "Main_master.c" 2
+# 25 "Main_master.c" 2
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c90\\stdint.h" 3
@@ -2649,7 +2651,7 @@ typedef int16_t intptr_t;
 
 
 typedef uint16_t uintptr_t;
-# 24 "Main_master.c" 2
+# 26 "Main_master.c" 2
 
 # 1 "./LCD_8bits.h" 1
 # 17 "./LCD_8bits.h"
@@ -2670,7 +2672,7 @@ void LCD_WRITE_CHAR (char a);
 void LCD_WRITE_STRING(char *a);
 void LCD_SHIFT_RIGHT(void);
 void LCD_SHIFT_LEFT(void);
-# 25 "Main_master.c" 2
+# 27 "Main_master.c" 2
 
 # 1 "./I2C_header.h" 1
 # 16 "./I2C_header.h"
@@ -2686,15 +2688,17 @@ void Restart_I2C(void);
 void Stop_I2C_Master(void);
 void Write_I2C_Master(unsigned a);
 unsigned short I2C_Master_Read(unsigned short a);
-# 26 "Main_master.c" 2
+# 28 "Main_master.c" 2
 
 
 uint8_t address = 0;
 uint8_t pot, foto, cont, unipot, deci1pot, deci2pot;
+uint8_t a = 0;
 uint8_t unifoto, deci1foto, deci2foto;
 uint8_t unicont, dececont;
-float potf;
-float fotof;
+uint16_t tempot, temfoto;
+double potf;
+double fotof;
 char charfoto1, charpot1;
 char charfoto2, charpot2;
 char charfoto3, charpot3;
@@ -2703,8 +2707,8 @@ char charcont1, charcont2;
 void Init_Port(void);
 uint8_t obtener_unidades(uint8_t a);
 uint8_t obtener_decenas(uint8_t a);
-uint8_t obtener_decimal_1(uint8_t a);
-uint8_t obtener_decimal_2(uint8_t a);
+uint8_t obtener_decimal_1(float a);
+uint8_t obtener_decimal_2(float a);
 uint8_t convertir_a_ascii (uint8_t a);
 
 
@@ -2713,9 +2717,21 @@ void main(void) {
     Init_I2C_Master(100000);
     LCD_INIT();
     while (1){
-# 62 "Main_master.c"
-        potf = 3.22;
-        fotof = foto*(5/255);
+        LCD_SET_CURSOR (1,1);
+        LCD_WRITE_STRING ("Pot   Foto  Cont");
+        Start_I2C_Master();
+        Write_I2C_Master(0x11);
+        pot = 125;
+
+
+
+
+        Stop_I2C_Master();
+        _delay((unsigned long)((50)*(4000000/4000.0)));
+
+        potf = pot*(5.0/255);
+        fotof = foto*(5.0/255);
+
 
         unipot = obtener_unidades(potf);
         deci1pot = obtener_decimal_1(potf);
@@ -2739,8 +2755,6 @@ void main(void) {
         charcont1 = convertir_a_ascii(unicont);
         charcont2 = convertir_a_ascii(dececont);
 
-        LCD_SET_CURSOR (1,1);
-        LCD_WRITE_STRING ("Pot   Foto  Cont");
         LCD_SET_CURSOR (2,1);
         LCD_WRITE_CHAR (charpot1);
         LCD_WRITE_STRING(".");
@@ -2770,29 +2784,31 @@ void Init_Port(void){
 
 
 uint8_t obtener_unidades(uint8_t a){
-    int temporal;
+    uint8_t temporal;
     temporal = a%10;
     return temporal;
 }
 uint8_t obtener_decenas(uint8_t a){
-    int temporal;
+    uint8_t temporal;
     temporal = (a/10)%10;
     return temporal;
 }
 
-uint8_t obtener_decimal_1(uint8_t a){
-    int temporal;
-    temporal = (a*10)%10;
+uint8_t obtener_decimal_1(float a){
+    uint16_t temporal;
+    temporal = (a*10);
+    temporal = temporal%10;
     return temporal;
 }
-uint8_t obtener_decimal_2(uint8_t a){
-    int temporal;
-    temporal = (a*100)%10;
+uint8_t obtener_decimal_2(float a){
+    uint16_t temporal;
+    temporal = (a*100);
+    temporal = temporal%10;
     return temporal;
 }
 
 uint8_t convertir_a_ascii (uint8_t a){
     char temporal;
-    temporal = a+(int)"0";
+    temporal = a+ 0x30;
     return temporal;
 }

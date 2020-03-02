@@ -1,7 +1,7 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"39 Main_master.c
-[; ;Main_master.c: 39: void Init_Port(void);
+"43 Main_master.c
+[; ;Main_master.c: 43: void Init_Port(void);
 [v _Init_Port `(v ~T0 @X0 0 ef ]
 "18 ./I2C_header.h
 [; ;./I2C_header.h: 18: void Init_I2C_Master(const unsigned long b);
@@ -9,6 +9,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "27 ./LCD_8bits.h
 [; ;./LCD_8bits.h: 27: void LCD_INIT (void);
 [v _LCD_INIT `(v ~T0 @X0 0 ef ]
+"26
+[; ;./LCD_8bits.h: 26: void LCD_SET_CURSOR (uint8_t a, uint8_t b);
+[v _LCD_SET_CURSOR `(v ~T0 @X0 0 ef2`uc`uc ]
+"29
+[; ;./LCD_8bits.h: 29: void LCD_WRITE_STRING(char *a);
+[v _LCD_WRITE_STRING `(v ~T0 @X0 0 ef1`*uc ]
 "21 ./I2C_header.h
 [; ;./I2C_header.h: 21: void Start_I2C_Master(void);
 [v _Start_I2C_Master `(v ~T0 @X0 0 ef ]
@@ -21,28 +27,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23
 [; ;./I2C_header.h: 23: void Stop_I2C_Master(void);
 [v _Stop_I2C_Master `(v ~T0 @X0 0 ef ]
-"40 Main_master.c
-[; ;Main_master.c: 40: uint8_t obtener_unidades(uint8_t a);
+[v F1256 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic.h
+[v __delay `JF1256 ~T0 @X0 0 e ]
+[p i __delay ]
+"44 Main_master.c
+[; ;Main_master.c: 44: uint8_t obtener_unidades(uint8_t a);
 [v _obtener_unidades `(uc ~T0 @X0 0 ef1`uc ]
-"42
-[; ;Main_master.c: 42: uint8_t obtener_decimal_1(uint8_t a);
-[v _obtener_decimal_1 `(uc ~T0 @X0 0 ef1`uc ]
-"43
-[; ;Main_master.c: 43: uint8_t obtener_decimal_2(uint8_t a);
-[v _obtener_decimal_2 `(uc ~T0 @X0 0 ef1`uc ]
-"41
-[; ;Main_master.c: 41: uint8_t obtener_decenas(uint8_t a);
+"46
+[; ;Main_master.c: 46: uint8_t obtener_decimal_1(float a);
+[v _obtener_decimal_1 `(uc ~T0 @X0 0 ef1`f ]
+"47
+[; ;Main_master.c: 47: uint8_t obtener_decimal_2(float a);
+[v _obtener_decimal_2 `(uc ~T0 @X0 0 ef1`f ]
+"45
+[; ;Main_master.c: 45: uint8_t obtener_decenas(uint8_t a);
 [v _obtener_decenas `(uc ~T0 @X0 0 ef1`uc ]
-"44
-[; ;Main_master.c: 44: uint8_t convertir_a_ascii (uint8_t a);
+"48
+[; ;Main_master.c: 48: uint8_t convertir_a_ascii (uint8_t a);
 [v _convertir_a_ascii `(uc ~T0 @X0 0 ef1`uc ]
-"26 ./LCD_8bits.h
-[; ;./LCD_8bits.h: 26: void LCD_SET_CURSOR (uint8_t a, uint8_t b);
-[v _LCD_SET_CURSOR `(v ~T0 @X0 0 ef2`uc`uc ]
-"29
-[; ;./LCD_8bits.h: 29: void LCD_WRITE_STRING(char *a);
-[v _LCD_WRITE_STRING `(v ~T0 @X0 0 ef1`*uc ]
-"28
+"28 ./LCD_8bits.h
 [; ;./LCD_8bits.h: 28: void LCD_WRITE_CHAR (char a);
 [v _LCD_WRITE_CHAR `(v ~T0 @X0 0 ef1`uc ]
 "3387 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h
@@ -321,338 +325,374 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3546
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic16f887.h: 3546: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
-"28 Main_master.c
-[; ;Main_master.c: 28: uint8_t address = 0;
+"30 Main_master.c
+[; ;Main_master.c: 30: uint8_t address = 0;
 [v _address `uc ~T0 @X0 1 e ]
 [i _address
 -> -> 0 `i `uc
 ]
-"29
-[; ;Main_master.c: 29: uint8_t pot, foto, cont, unipot, deci1pot, deci2pot;
+"31
+[; ;Main_master.c: 31: uint8_t pot, foto, cont, unipot, deci1pot, deci2pot;
 [v _pot `uc ~T0 @X0 1 e ]
 [v _foto `uc ~T0 @X0 1 e ]
 [v _cont `uc ~T0 @X0 1 e ]
 [v _unipot `uc ~T0 @X0 1 e ]
 [v _deci1pot `uc ~T0 @X0 1 e ]
 [v _deci2pot `uc ~T0 @X0 1 e ]
-"30
-[; ;Main_master.c: 30: uint8_t unifoto, deci1foto, deci2foto;
+"32
+[; ;Main_master.c: 32: uint8_t a = 0;
+[v _a `uc ~T0 @X0 1 e ]
+[i _a
+-> -> 0 `i `uc
+]
+"33
+[; ;Main_master.c: 33: uint8_t unifoto, deci1foto, deci2foto;
 [v _unifoto `uc ~T0 @X0 1 e ]
 [v _deci1foto `uc ~T0 @X0 1 e ]
 [v _deci2foto `uc ~T0 @X0 1 e ]
-"31
-[; ;Main_master.c: 31: uint8_t unicont, dececont;
+"34
+[; ;Main_master.c: 34: uint8_t unicont, dececont;
 [v _unicont `uc ~T0 @X0 1 e ]
 [v _dececont `uc ~T0 @X0 1 e ]
-"32
-[; ;Main_master.c: 32: float potf = 3.22;
-[v _potf `f ~T0 @X0 1 e ]
-[i _potf
--> .3.22 `f
-]
-"33
-[; ;Main_master.c: 33: float fotof;
-[v _fotof `f ~T0 @X0 1 e ]
-"34
-[; ;Main_master.c: 34: char charfoto1, charpot1;
+"35
+[; ;Main_master.c: 35: uint16_t tempot, temfoto;
+[v _tempot `ui ~T0 @X0 1 e ]
+[v _temfoto `ui ~T0 @X0 1 e ]
+"36
+[; ;Main_master.c: 36: double potf;
+[v _potf `d ~T0 @X0 1 e ]
+"37
+[; ;Main_master.c: 37: double fotof;
+[v _fotof `d ~T0 @X0 1 e ]
+"38
+[; ;Main_master.c: 38: char charfoto1, charpot1;
 [v _charfoto1 `uc ~T0 @X0 1 e ]
 [v _charpot1 `uc ~T0 @X0 1 e ]
-"35
-[; ;Main_master.c: 35: char charfoto2, charpot2;
+"39
+[; ;Main_master.c: 39: char charfoto2, charpot2;
 [v _charfoto2 `uc ~T0 @X0 1 e ]
 [v _charpot2 `uc ~T0 @X0 1 e ]
-"36
-[; ;Main_master.c: 36: char charfoto3, charpot3;
+"40
+[; ;Main_master.c: 40: char charfoto3, charpot3;
 [v _charfoto3 `uc ~T0 @X0 1 e ]
 [v _charpot3 `uc ~T0 @X0 1 e ]
-"37
-[; ;Main_master.c: 37: char charcont1, charcont2;
+"41
+[; ;Main_master.c: 41: char charcont1, charcont2;
 [v _charcont1 `uc ~T0 @X0 1 e ]
 [v _charcont2 `uc ~T0 @X0 1 e ]
 [v $root$_main `(v ~T0 @X0 0 e ]
-"47
-[; ;Main_master.c: 47: void main(void) {
+"51
+[; ;Main_master.c: 51: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"48
-[; ;Main_master.c: 48:     Init_Port();
+"52
+[; ;Main_master.c: 52:     Init_Port();
 [e ( _Init_Port ..  ]
-"49
-[; ;Main_master.c: 49:     Init_I2C_Master(100000);
+"53
+[; ;Main_master.c: 53:     Init_I2C_Master(100000);
 [e ( _Init_I2C_Master (1 -> -> 100000 `l `ul ]
-"50
-[; ;Main_master.c: 50:     LCD_INIT();
+"54
+[; ;Main_master.c: 54:     LCD_INIT();
 [e ( _LCD_INIT ..  ]
-"51
-[; ;Main_master.c: 51:     while (1){
+"55
+[; ;Main_master.c: 55:     while (1){
 [e :U 140 ]
 {
-"52
-[; ;Main_master.c: 52:         Start_I2C_Master();
-[e ( _Start_I2C_Master ..  ]
-"53
-[; ;Main_master.c: 53:         Write_I2C_Master(0x11);
-[e ( _Write_I2C_Master (1 -> -> 17 `i `ui ]
-"54
-[; ;Main_master.c: 54:         pot = I2C_Master_Read(0);
-[e = _pot -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"55
-[; ;Main_master.c: 55:         Write_I2C_Master(0x21);
-[e ( _Write_I2C_Master (1 -> -> 33 `i `ui ]
 "56
-[; ;Main_master.c: 56:         foto = I2C_Master_Read(0);
-[e = _foto -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"57
-[; ;Main_master.c: 57:         Write_I2C_Master(0x31);
-[e ( _Write_I2C_Master (1 -> -> 49 `i `ui ]
-"58
-[; ;Main_master.c: 58:         cont = I2C_Master_Read(0);
-[e = _cont -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"59
-[; ;Main_master.c: 59:         Stop_I2C_Master();
-[e ( _Stop_I2C_Master ..  ]
-"62
-[; ;Main_master.c: 62:         fotof = foto*(5/255);
-[e = _fotof -> * -> _foto `i / -> 5 `i -> 255 `i `f ]
-"64
-[; ;Main_master.c: 64:         unipot = obtener_unidades(potf);
-[e = _unipot ( _obtener_unidades (1 -> _potf `uc ]
-"65
-[; ;Main_master.c: 65:         deci1pot = obtener_decimal_1(potf);
-[e = _deci1pot ( _obtener_decimal_1 (1 -> _potf `uc ]
-"66
-[; ;Main_master.c: 66:         deci2pot = obtener_decimal_2(potf);
-[e = _deci2pot ( _obtener_decimal_2 (1 -> _potf `uc ]
-"68
-[; ;Main_master.c: 68:         unifoto = obtener_unidades(fotof);
-[e = _unifoto ( _obtener_unidades (1 -> _fotof `uc ]
-"69
-[; ;Main_master.c: 69:         deci1foto = obtener_decimal_1(fotof);
-[e = _deci1foto ( _obtener_decimal_1 (1 -> _fotof `uc ]
-"70
-[; ;Main_master.c: 70:         deci2foto = obtener_decimal_2(fotof);
-[e = _deci2foto ( _obtener_decimal_2 (1 -> _fotof `uc ]
-"72
-[; ;Main_master.c: 72:         unicont = obtener_unidades(cont);
-[e = _unicont ( _obtener_unidades (1 _cont ]
-"73
-[; ;Main_master.c: 73:         dececont = obtener_decenas(cont);
-[e = _dececont ( _obtener_decenas (1 _cont ]
-"75
-[; ;Main_master.c: 75:         charpot1 = convertir_a_ascii(unipot);
-[e = _charpot1 -> ( _convertir_a_ascii (1 _unipot `uc ]
-"76
-[; ;Main_master.c: 76:         charpot2 = convertir_a_ascii(deci1pot);
-[e = _charpot2 -> ( _convertir_a_ascii (1 _deci1pot `uc ]
-"77
-[; ;Main_master.c: 77:         charpot3 = convertir_a_ascii(deci2pot);
-[e = _charpot3 -> ( _convertir_a_ascii (1 _deci2pot `uc ]
-"79
-[; ;Main_master.c: 79:         charfoto1 = convertir_a_ascii(unifoto);
-[e = _charfoto1 -> ( _convertir_a_ascii (1 _unifoto `uc ]
-"80
-[; ;Main_master.c: 80:         charfoto2 = convertir_a_ascii(deci1foto);
-[e = _charfoto2 -> ( _convertir_a_ascii (1 _deci1foto `uc ]
-"81
-[; ;Main_master.c: 81:         charfoto3 = convertir_a_ascii(deci2foto);
-[e = _charfoto3 -> ( _convertir_a_ascii (1 _deci2foto `uc ]
-"83
-[; ;Main_master.c: 83:         charcont1 = convertir_a_ascii(unicont);
-[e = _charcont1 -> ( _convertir_a_ascii (1 _unicont `uc ]
-"84
-[; ;Main_master.c: 84:         charcont2 = convertir_a_ascii(dececont);
-[e = _charcont2 -> ( _convertir_a_ascii (1 _dececont `uc ]
-"86
-[; ;Main_master.c: 86:         LCD_SET_CURSOR (1,1);
+[; ;Main_master.c: 56:         LCD_SET_CURSOR (1,1);
 [e ( _LCD_SET_CURSOR (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-"87
-[; ;Main_master.c: 87:         LCD_WRITE_STRING ("Pot   Foto  Cont");
+"57
+[; ;Main_master.c: 57:         LCD_WRITE_STRING ("Pot   Foto  Cont");
 [e ( _LCD_WRITE_STRING (1 :s 1C ]
-"88
-[; ;Main_master.c: 88:         LCD_SET_CURSOR (2,1);
-[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"59
+[; ;Main_master.c: 59:         Start_I2C_Master();
+[e ( _Start_I2C_Master ..  ]
+"60
+[; ;Main_master.c: 60:         Write_I2C_Master(0x11);
+[e ( _Write_I2C_Master (1 -> -> 17 `i `ui ]
+"61
+[; ;Main_master.c: 61:         pot = I2C_Master_Read(0);
+[e = _pot -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"62
+[; ;Main_master.c: 62:         Stop_I2C_Master();
+[e ( _Stop_I2C_Master ..  ]
+"63
+[; ;Main_master.c: 63:         _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"65
+[; ;Main_master.c: 65:         Start_I2C_Master();
+[e ( _Start_I2C_Master ..  ]
+"66
+[; ;Main_master.c: 66:         Write_I2C_Master(0x21);
+[e ( _Write_I2C_Master (1 -> -> 33 `i `ui ]
+"67
+[; ;Main_master.c: 67:         foto = I2C_Master_Read(0);
+[e = _foto -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"68
+[; ;Main_master.c: 68:         Stop_I2C_Master();
+[e ( _Stop_I2C_Master ..  ]
+"69
+[; ;Main_master.c: 69:         _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"71
+[; ;Main_master.c: 71:         Start_I2C_Master();
+[e ( _Start_I2C_Master ..  ]
+"72
+[; ;Main_master.c: 72:         Write_I2C_Master(0x31);
+[e ( _Write_I2C_Master (1 -> -> 49 `i `ui ]
+"73
+[; ;Main_master.c: 73:         cont = I2C_Master_Read(0);
+[e = _cont -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+"74
+[; ;Main_master.c: 74:         Stop_I2C_Master();
+[e ( _Stop_I2C_Master ..  ]
+"75
+[; ;Main_master.c: 75:         _delay((unsigned long)((10)*(4000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 4000000 `l `d .4000.0 `ul ]
+"77
+[; ;Main_master.c: 77:         potf = pot*(5.0/255);
+[e = _potf * -> -> _pot `i `d / .5.0 -> -> 255 `i `d ]
+"78
+[; ;Main_master.c: 78:         fotof = foto*(5.0/255);
+[e = _fotof * -> -> _foto `i `d / .5.0 -> -> 255 `i `d ]
+"81
+[; ;Main_master.c: 81:         unipot = obtener_unidades(potf);
+[e = _unipot ( _obtener_unidades (1 -> _potf `uc ]
+"82
+[; ;Main_master.c: 82:         deci1pot = obtener_decimal_1(potf);
+[e = _deci1pot ( _obtener_decimal_1 (1 -> _potf `f ]
+"83
+[; ;Main_master.c: 83:         deci2pot = obtener_decimal_2(potf);
+[e = _deci2pot ( _obtener_decimal_2 (1 -> _potf `f ]
+"85
+[; ;Main_master.c: 85:         unifoto = obtener_unidades(fotof);
+[e = _unifoto ( _obtener_unidades (1 -> _fotof `uc ]
+"86
+[; ;Main_master.c: 86:         deci1foto = obtener_decimal_1(fotof);
+[e = _deci1foto ( _obtener_decimal_1 (1 -> _fotof `f ]
+"87
+[; ;Main_master.c: 87:         deci2foto = obtener_decimal_2(fotof);
+[e = _deci2foto ( _obtener_decimal_2 (1 -> _fotof `f ]
 "89
-[; ;Main_master.c: 89:         LCD_WRITE_CHAR (charpot1);
-[e ( _LCD_WRITE_CHAR (1 _charpot1 ]
+[; ;Main_master.c: 89:         unicont = obtener_unidades(cont);
+[e = _unicont ( _obtener_unidades (1 _cont ]
 "90
-[; ;Main_master.c: 90:         LCD_WRITE_STRING(".");
-[e ( _LCD_WRITE_STRING (1 :s 2C ]
-"91
-[; ;Main_master.c: 91:         LCD_WRITE_CHAR (charpot2);
-[e ( _LCD_WRITE_CHAR (1 _charpot2 ]
+[; ;Main_master.c: 90:         dececont = obtener_decenas(cont);
+[e = _dececont ( _obtener_decenas (1 _cont ]
 "92
-[; ;Main_master.c: 92:         LCD_WRITE_CHAR (charpot3);
-[e ( _LCD_WRITE_CHAR (1 _charpot3 ]
+[; ;Main_master.c: 92:         charpot1 = convertir_a_ascii(unipot);
+[e = _charpot1 -> ( _convertir_a_ascii (1 _unipot `uc ]
+"93
+[; ;Main_master.c: 93:         charpot2 = convertir_a_ascii(deci1pot);
+[e = _charpot2 -> ( _convertir_a_ascii (1 _deci1pot `uc ]
 "94
-[; ;Main_master.c: 94:         LCD_SET_CURSOR (2,7);
-[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
-"95
-[; ;Main_master.c: 95:         LCD_WRITE_CHAR (charfoto1);
-[e ( _LCD_WRITE_CHAR (1 _charfoto1 ]
+[; ;Main_master.c: 94:         charpot3 = convertir_a_ascii(deci2pot);
+[e = _charpot3 -> ( _convertir_a_ascii (1 _deci2pot `uc ]
 "96
-[; ;Main_master.c: 96:         LCD_WRITE_STRING(".");
-[e ( _LCD_WRITE_STRING (1 :s 3C ]
+[; ;Main_master.c: 96:         charfoto1 = convertir_a_ascii(unifoto);
+[e = _charfoto1 -> ( _convertir_a_ascii (1 _unifoto `uc ]
 "97
-[; ;Main_master.c: 97:         LCD_WRITE_CHAR (charfoto2);
-[e ( _LCD_WRITE_CHAR (1 _charfoto2 ]
+[; ;Main_master.c: 97:         charfoto2 = convertir_a_ascii(deci1foto);
+[e = _charfoto2 -> ( _convertir_a_ascii (1 _deci1foto `uc ]
 "98
-[; ;Main_master.c: 98:         LCD_WRITE_CHAR (charfoto3);
-[e ( _LCD_WRITE_CHAR (1 _charfoto3 ]
+[; ;Main_master.c: 98:         charfoto3 = convertir_a_ascii(deci2foto);
+[e = _charfoto3 -> ( _convertir_a_ascii (1 _deci2foto `uc ]
 "100
-[; ;Main_master.c: 100:         LCD_SET_CURSOR (2,13);
-[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 13 `i `uc ]
+[; ;Main_master.c: 100:         charcont1 = convertir_a_ascii(unicont);
+[e = _charcont1 -> ( _convertir_a_ascii (1 _unicont `uc ]
 "101
-[; ;Main_master.c: 101:         LCD_WRITE_CHAR (charcont1);
-[e ( _LCD_WRITE_CHAR (1 _charcont1 ]
-"102
-[; ;Main_master.c: 102:         LCD_WRITE_CHAR (charcont2);
-[e ( _LCD_WRITE_CHAR (1 _charcont2 ]
+[; ;Main_master.c: 101:         charcont2 = convertir_a_ascii(dececont);
+[e = _charcont2 -> ( _convertir_a_ascii (1 _dececont `uc ]
 "103
-[; ;Main_master.c: 103:     }
+[; ;Main_master.c: 103:         LCD_SET_CURSOR (2,1);
+[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+"104
+[; ;Main_master.c: 104:         LCD_WRITE_CHAR (charpot1);
+[e ( _LCD_WRITE_CHAR (1 _charpot1 ]
+"105
+[; ;Main_master.c: 105:         LCD_WRITE_STRING(".");
+[e ( _LCD_WRITE_STRING (1 :s 2C ]
+"106
+[; ;Main_master.c: 106:         LCD_WRITE_CHAR (charpot2);
+[e ( _LCD_WRITE_CHAR (1 _charpot2 ]
+"107
+[; ;Main_master.c: 107:         LCD_WRITE_CHAR (charpot3);
+[e ( _LCD_WRITE_CHAR (1 _charpot3 ]
+"109
+[; ;Main_master.c: 109:         LCD_SET_CURSOR (2,7);
+[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"110
+[; ;Main_master.c: 110:         LCD_WRITE_CHAR (charfoto1);
+[e ( _LCD_WRITE_CHAR (1 _charfoto1 ]
+"111
+[; ;Main_master.c: 111:         LCD_WRITE_STRING(".");
+[e ( _LCD_WRITE_STRING (1 :s 3C ]
+"112
+[; ;Main_master.c: 112:         LCD_WRITE_CHAR (charfoto2);
+[e ( _LCD_WRITE_CHAR (1 _charfoto2 ]
+"113
+[; ;Main_master.c: 113:         LCD_WRITE_CHAR (charfoto3);
+[e ( _LCD_WRITE_CHAR (1 _charfoto3 ]
+"115
+[; ;Main_master.c: 115:         LCD_SET_CURSOR (2,13);
+[e ( _LCD_SET_CURSOR (2 , -> -> 2 `i `uc -> -> 13 `i `uc ]
+"116
+[; ;Main_master.c: 116:         LCD_WRITE_CHAR (charcont1);
+[e ( _LCD_WRITE_CHAR (1 _charcont1 ]
+"117
+[; ;Main_master.c: 117:         LCD_WRITE_CHAR (charcont2);
+[e ( _LCD_WRITE_CHAR (1 _charcont2 ]
+"118
+[; ;Main_master.c: 118:     }
 }
 [e :U 139 ]
 [e $U 140  ]
 [e :U 141 ]
-"104
-[; ;Main_master.c: 104: }
+"119
+[; ;Main_master.c: 119: }
 [e :UE 138 ]
 }
-"106
-[; ;Main_master.c: 106: void Init_Port(void){
+"121
+[; ;Main_master.c: 121: void Init_Port(void){
 [v _Init_Port `(v ~T0 @X0 1 ef ]
 {
 [e :U _Init_Port ]
 [f ]
-"107
-[; ;Main_master.c: 107:     ANSEL = 0;
+"122
+[; ;Main_master.c: 122:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"108
-[; ;Main_master.c: 108:     ANSELH = 0;
+"123
+[; ;Main_master.c: 123:     ANSELH = 0;
 [e = _ANSELH -> -> 0 `i `uc ]
-"109
-[; ;Main_master.c: 109:     TRISB = 0;
+"124
+[; ;Main_master.c: 124:     TRISB = 0;
 [e = _TRISB -> -> 0 `i `uc ]
-"110
-[; ;Main_master.c: 110:     TRISD = 0;
+"125
+[; ;Main_master.c: 125:     TRISD = 0;
 [e = _TRISD -> -> 0 `i `uc ]
-"111
-[; ;Main_master.c: 111:     PORTB = 0;
+"126
+[; ;Main_master.c: 126:     PORTB = 0;
 [e = _PORTB -> -> 0 `i `uc ]
-"112
-[; ;Main_master.c: 112:     PORTD = 0;
+"127
+[; ;Main_master.c: 127:     PORTD = 0;
 [e = _PORTD -> -> 0 `i `uc ]
-"113
-[; ;Main_master.c: 113: }
+"128
+[; ;Main_master.c: 128: }
 [e :UE 142 ]
 }
-"116
-[; ;Main_master.c: 116: uint8_t obtener_unidades(uint8_t a){
+"131
+[; ;Main_master.c: 131: uint8_t obtener_unidades(uint8_t a){
 [v _obtener_unidades `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _obtener_unidades ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-"117
-[; ;Main_master.c: 117:     uint8_t temporal;
+"132
+[; ;Main_master.c: 132:     uint8_t temporal;
 [v _temporal `uc ~T0 @X0 1 a ]
-"118
-[; ;Main_master.c: 118:     temporal = a%10;
+"133
+[; ;Main_master.c: 133:     temporal = a%10;
 [e = _temporal -> % -> _a `i -> 10 `i `uc ]
-"119
-[; ;Main_master.c: 119:     return temporal;
+"134
+[; ;Main_master.c: 134:     return temporal;
 [e ) _temporal ]
 [e $UE 143  ]
-"120
-[; ;Main_master.c: 120: }
+"135
+[; ;Main_master.c: 135: }
 [e :UE 143 ]
 }
-"121
-[; ;Main_master.c: 121: uint8_t obtener_decenas(uint8_t a){
+"136
+[; ;Main_master.c: 136: uint8_t obtener_decenas(uint8_t a){
 [v _obtener_decenas `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _obtener_decenas ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-"122
-[; ;Main_master.c: 122:     uint8_t temporal;
+"137
+[; ;Main_master.c: 137:     uint8_t temporal;
 [v _temporal `uc ~T0 @X0 1 a ]
-"123
-[; ;Main_master.c: 123:     temporal = (a/10)%10;
+"138
+[; ;Main_master.c: 138:     temporal = (a/10)%10;
 [e = _temporal -> % / -> _a `i -> 10 `i -> 10 `i `uc ]
-"124
-[; ;Main_master.c: 124:     return temporal;
+"139
+[; ;Main_master.c: 139:     return temporal;
 [e ) _temporal ]
 [e $UE 144  ]
-"125
-[; ;Main_master.c: 125: }
+"140
+[; ;Main_master.c: 140: }
 [e :UE 144 ]
 }
-"127
-[; ;Main_master.c: 127: uint8_t obtener_decimal_1(uint8_t a){
-[v _obtener_decimal_1 `(uc ~T0 @X0 1 ef1`uc ]
+"142
+[; ;Main_master.c: 142: uint8_t obtener_decimal_1(float a){
+[v _obtener_decimal_1 `(uc ~T0 @X0 1 ef1`f ]
 {
 [e :U _obtener_decimal_1 ]
-[v _a `uc ~T0 @X0 1 r1 ]
+[v _a `f ~T0 @X0 1 r1 ]
 [f ]
-"128
-[; ;Main_master.c: 128:     uint8_t temporal;
-[v _temporal `uc ~T0 @X0 1 a ]
-"129
-[; ;Main_master.c: 129:     temporal = (a*10)%10;
-[e = _temporal -> % * -> _a `i -> 10 `i -> 10 `i `uc ]
-"130
-[; ;Main_master.c: 130:     return temporal;
-[e ) _temporal ]
+"143
+[; ;Main_master.c: 143:     uint16_t temporal;
+[v _temporal `ui ~T0 @X0 1 a ]
+"144
+[; ;Main_master.c: 144:     temporal = (a*10);
+[e = _temporal -> * _a -> -> 10 `i `f `ui ]
+"145
+[; ;Main_master.c: 145:     temporal = temporal%10;
+[e = _temporal % _temporal -> -> 10 `i `ui ]
+"146
+[; ;Main_master.c: 146:     return temporal;
+[e ) -> _temporal `uc ]
 [e $UE 145  ]
-"131
-[; ;Main_master.c: 131: }
+"147
+[; ;Main_master.c: 147: }
 [e :UE 145 ]
 }
-"132
-[; ;Main_master.c: 132: uint8_t obtener_decimal_2(uint8_t a){
-[v _obtener_decimal_2 `(uc ~T0 @X0 1 ef1`uc ]
+"148
+[; ;Main_master.c: 148: uint8_t obtener_decimal_2(float a){
+[v _obtener_decimal_2 `(uc ~T0 @X0 1 ef1`f ]
 {
 [e :U _obtener_decimal_2 ]
-[v _a `uc ~T0 @X0 1 r1 ]
+[v _a `f ~T0 @X0 1 r1 ]
 [f ]
-"133
-[; ;Main_master.c: 133:     uint8_t temporal;
-[v _temporal `uc ~T0 @X0 1 a ]
-"134
-[; ;Main_master.c: 134:     temporal = (a*100)%10;
-[e = _temporal -> % * -> _a `i -> 100 `i -> 10 `i `uc ]
-"135
-[; ;Main_master.c: 135:     return temporal;
-[e ) _temporal ]
+"149
+[; ;Main_master.c: 149:     uint16_t temporal;
+[v _temporal `ui ~T0 @X0 1 a ]
+"150
+[; ;Main_master.c: 150:     temporal = (a*100);
+[e = _temporal -> * _a -> -> 100 `i `f `ui ]
+"151
+[; ;Main_master.c: 151:     temporal = temporal%10;
+[e = _temporal % _temporal -> -> 10 `i `ui ]
+"152
+[; ;Main_master.c: 152:     return temporal;
+[e ) -> _temporal `uc ]
 [e $UE 146  ]
-"136
-[; ;Main_master.c: 136: }
+"153
+[; ;Main_master.c: 153: }
 [e :UE 146 ]
 }
-"138
-[; ;Main_master.c: 138: uint8_t convertir_a_ascii (uint8_t a){
+"155
+[; ;Main_master.c: 155: uint8_t convertir_a_ascii (uint8_t a){
 [v _convertir_a_ascii `(uc ~T0 @X0 1 ef1`uc ]
 {
 [e :U _convertir_a_ascii ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-"139
-[; ;Main_master.c: 139:     char temporal;
+"156
+[; ;Main_master.c: 156:     char temporal;
 [v _temporal `uc ~T0 @X0 1 a ]
-"140
-[; ;Main_master.c: 140:     temporal = a+(int)"0";
-[e = _temporal -> + -> _a `i -> :s 4C `i `uc ]
-"141
-[; ;Main_master.c: 141:     return temporal;
+"157
+[; ;Main_master.c: 157:     temporal = a+ 0x30;
+[e = _temporal -> + -> _a `i -> 48 `i `uc ]
+"158
+[; ;Main_master.c: 158:     return temporal;
 [e ) -> _temporal `uc ]
 [e $UE 147  ]
-"142
-[; ;Main_master.c: 142: }
+"159
+[; ;Main_master.c: 159: }
 [e :UE 147 ]
 }
 [a 1C 80 111 116 32 32 32 70 111 116 111 32 32 67 111 110 116 0 ]
-[a 4C 48 0 ]
 [a 2C 46 0 ]
 [a 3C 46 0 ]

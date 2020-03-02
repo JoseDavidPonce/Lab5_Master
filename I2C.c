@@ -40,7 +40,7 @@ void Init_I2C_Slave(uint8_t address){
 }
 
 void Wait_I2C_Master(){
-    while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
+    while ((SSPSTATbits.R_nW == 1) || (SSPCON2 & 0x1F));
 }
 
 void Start_I2C_Master(){
